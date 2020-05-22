@@ -1,8 +1,7 @@
 #include <Arduino.h>
-#define LOG_LOCAL_LEVEL ESP_LOG_VERBOSE
-#include "esp_log.h"
 
-static const char* TAG "thimy";
+
+
 void setup() {
   // put your setup code here, to run once:
   int a=12,b=-1200;
