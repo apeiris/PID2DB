@@ -7,24 +7,19 @@
 const char *ssid = "Peiris_Wifi";
 const char *wifiPassword = "22051954";
 
-IPAddress sqlIP(192,168,0,12);
+IPAddress sqlIP(192, 168, 0, 12);
 
 int loginCounter = 0;
 WebThingAdapter *adapter;
-String mac=WiFi.macAddress();
+String mac = WiFi.macAddress();
 
 void setup()
 {
-
-
-#if defined(ESP8266) || defined(ESP32)
   WiFi.mode(WIFI_STA);
-#endif
-
   Serial.print("Connecting :\n ");
   WiFi.begin(ssid, wifiPassword);
-mac.replace(":","");
- printf("Connected... mac=%s\n",mac.c_str());
+  mac.replace(":", "");
+  printf("Connected... mac=%s\n", mac.c_str());
 }
 
 void loop()
