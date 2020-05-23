@@ -56,7 +56,7 @@ void setup()
   itoa(tt, stt, 10);
   printf("Done in %s milli seconds...!\n", stt);
   printf("done./n\n");
-  // memset(q,0,sizeof q);// we have no use anymore
+  memset(q, 0, sizeof q); // we have no use anymore
   delete cur;
 }
 
