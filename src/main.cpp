@@ -46,16 +46,15 @@ void setup()
   char q[256];
   printf("Exec ->%s\n", insert_device);
   sprintf(q, insert_device, mac.c_str(), "ESP32-1");
-  unsigned long st = millis();
 
+  unsigned long st = millis();
   printf("Exec ->%s\n", q);
   cur->execute(q);
-  unsigned long ct = millis();
-  unsigned long tt = ct - st;
+
+  unsigned long tt = millis() - st; // blah .. should not do arithmatic on time !
   char stt[6];
   itoa(tt, stt, 10);
   printf("Done in %s milli seconds...!\n", stt);
-  printf("done./n\n");
   memset(q, 0, sizeof q); // we have no use anymore
   delete cur;
 }
