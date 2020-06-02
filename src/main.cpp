@@ -8,7 +8,7 @@
 #include <WiFi.h>
 
 #define DEBUGmSql
-#include"mySql.h"
+#include "mySql.h"
 
 const char *ssid = "Peiris_Wifi";
 const char *wifiPassword = "22051954";
@@ -24,7 +24,7 @@ char sqlPassword[] = "2205";
 
 WiFiClient wClient;
 
-MySQL_Connection sconn((Client*) &wClient);
+MySQL_Connection sconn((Client *)&wClient);
 //----------------------------------------------------------
 
 void ExecSQL(MySQL_Connection *conn)
@@ -32,7 +32,7 @@ void ExecSQL(MySQL_Connection *conn)
 
   MySQL_Cursor *cur = new MySQL_Cursor(conn);
   char q[256];
-  sprintf(q, "CALL iot.insertEvent('%s','%s',%.2lf,@outx);", mac.c_str(), "TH1", 101.21);
+  sprintf(q, "CALL iot.insertEvent('%s','%s',%.2lf,'%s',@outx);", mac.c_str(), "TH1", 101.21,mac.c_str());
   unsigned long st = millis();
   printf("%s\n", q);
   cur->execute(q);
@@ -72,13 +72,14 @@ void setup()
   delay(500);
   mac.replace(":", "");
   printf("Wifi Connected... mac=%s\n", mac.c_str());
- 
+
   //------------------------------------------------------
   char q[256];
-  sprintf(q, "CALL iot.insertEvent('%s','%s',%.2lf,@outx);", mac.c_str(), "TH3", 101.21);
+  //sprintf(q, "CALL iot.insertEvent('%s','%s',%.2lf,@outx);", mac.c_str(), "TH3", 101.21);
+    sprintf(q, "CALL iot.insertEvent('%s','%s',%.2lf,'%s',@outx);", mac.c_str(), "TH1", 101.21,mac.c_str());
   for (int i = 1; i <= 100; i++)
     //sql::ExecSQL((char*)q);
-  
+
     memset(q, 0, sizeof q); // we have no use anymore
   printf("Completed...\n");
 
@@ -86,16 +87,15 @@ void setup()
 
   printf("Sql u=%s ,char[] sqlUser=%s\n\n", u.c_str(), sqlUser);
   //----On to mSql Class ---------------------------------
-  
-  mySql sql(wClient,sqlIP,3306,sqlUser,sqlPassword,"IOT");
-  sprintf(q, "CALL iot.insertEvent('%s','%s',%.2lf,@outx);", mac.c_str(), "TH1", 101.21);
-for(int i=1; i< 100; i++)
- sql.ExecSql(q);
 
-  //------------------------------------------------------
+  mySql sql(wClient, sqlIP, 3306, sqlUser, sqlPassword, "IOT");
+
+  //sprintf(q, "CALL iot.insertEvent('%s','%s',%.2lf,@outx);", mac.c_str(), "TH1", 101.21);
+    sprintf(q, "CALL iot.insertEvent('%s','%s',%.2lf,'%s',@outx);", mac.c_str(), "TH1", 101.21,mac.c_str());
+  for (int i = 1; i < 100; i++)
+    sql.ExecSql(q);
 
 }
-
 void loop()
 {
   // put your main code here, to run repeatedly:

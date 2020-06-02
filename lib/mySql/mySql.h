@@ -10,13 +10,13 @@ class mySql
 public:
     mySql(Client &client, IPAddress hostIP, int hostPort, String user, String password, String db);
     int ExecSql(String sqlToExec);
-
+    ~mySql();
 private:
     Client& _client;
     IPAddress _hostIP;
     int _hostPort;
     String _user, _password;
     String _db;
-    //MySQL_Connection _conn;
+
 };
 #endif // __mSql_H__
